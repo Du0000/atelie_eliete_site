@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ateliê da Eliete</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+html { scroll-behavior: smooth; }
+
+:root {
+  --primary: #e88aa3;
+  --bg: #fff0f5;
+  --text: #333;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top:0;
+  background:white;
+  z-index:100;
+  transition:0.3s;
+}
+
+header.scrolled {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+}
+
+.container {
+  max-width:1100px;
+  margin:auto;
+  padding:10px;
+}
+
+.nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  color:var(--primary);
+}
+
+.logo img {
+  width:80px;
+  height:80px;
+  border-radius:50%;
+}
+
+/* MENU */
+.menu {
+  display:flex;
+  gap:25px;
+}
+
+.menu a {
+  text-decoration:none;
+  font-weight:600;
+  color:var(--text);
+  position:relative;
+}
+
+.menu a::after {
+  content:"";
+  position:absolute;
+  bottom:-5px;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--primary);
+  transition:0.3s;
+}
+
+.menu a:hover::after { width:100%; }
+
+.menu-cta {
+  background:var(--primary);
+  color:white !important;
+  padding:8px 18px;
+  border-radius:20px;
+}
+
+.menu-toggle {
+  display:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero {
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  position:relative;
+}
+
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("imagem/fundo001.jpeg") center/cover no-repeat;
+  background-attachment:fixed;
+  z-index:-2;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  z-index:-1;
+}
+
+.hero h1 { font-size:2.5rem; }
+
+.btn {
+  display:inline-block;
+  margin-top:20px;
+  padding:15px 30px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#e88aa3,#d96b8a);
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* SEÇÕES */
+section { padding:60px 20px; }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card {
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  transition:0.3s;
+  display: flex;
+  flex-direction:column ;
+  align-items: center;
+}
+
+.card:hover { transform:translateY(-8px); }
+
+/* SOBRE */
+.sobre-flex {
+  display:flex;
+  flex-wrap:wrap;
+  gap:30px;
+  align-items:center;
+}
+
+.sobre-flex img {
+  width:100%;
+  border-radius:15px;
+}
+
+/* GALERIA */
+.galeria img {
+  border-radius:15px;
+}
+
+/* ANIMAÇÃO */
+.fade-in {
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.8s;
+}
+
+.fade-in.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* FORM */
+input, textarea {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+/* WHATS */
+.whatsapp {
+  position:fixed;
+  bottom:20px;
+  right:15px;
+  background:#25d366;
+  color:white;
+  padding:9px 9px;
+  border-radius:40px;
+  text-decoration:none;
+}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+  .menu {
+    position:absolute;
+    top:80px;
+    right:0;
+    background:white;
+    width:100%;
+    flex-direction:column;
+    align-items:center;
+    display:none;
+  }
+  .menu.active { display:flex; }
+  .menu-toggle { display:block; }
+  .hero h1 { font-size:1.8rem; }
+}
+
+.estrelas span {
+  font-size: 30px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.estrelas .ativa {
+  color: gold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<div class="logo">
+<img src="imagem/mãe.jpeg">
+Ateliê da Eliete
+</div>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav class="menu" id="menu">
+<a href="#">Início</a>
+<a href="#sobre">Sobre</a>
+<a href="#servicos">Serviços</a>
+<a href="#avaliacoes">Atendimentos</a>
+<a href="https://wa.me/5511961166828?text=Olá!%20Quero%20fazer%20um%20orçamento%20de%20algumas%20reformas" class="menu-cta">Orçamento</a>
+</nav>
+
+</div>
+</header>
+
+<section class="hero">
+<div>
+<h1>Transformamos suas roupas com perfeição</h1>
+<p>Costura profissional com carinho e qualidade</p>
+<a href="https://wa.me/5511961166828?text=Olá,%20vim%20pelo%20site%20e%20quero%20orçamento" class="btn">
+Fazer orçamento
+</a>
+</div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="fade-in">
+<div class="container">
+<h2>Sobre o Ateliê</h2>
+
+<div class="sobre-flex" style="margin-top:30px;">
+<div style="flex:1; min-width:250px;"><img src="imagem/costurar.jpg"></div>
+<div style="flex:1; min-width:250px;">
+<p><b><i>No Ateliê da Eliete, cada peça recebe atenção especial.</i></b></p>
+<p style="margin-top:15px;">Trabalhamos com consertos e ajustes com acabamento profissional e muito cuidado.</p>
+<p style="margin-top:15px;">Seu estilo valorizado com perfeição e carinho.</p>
+</div>
+</div>
+
+<div class="grid" style="margin-top:40px;">
+<div class="card"><h3><img src="imagem/personalizado.png" ><br>Atendimento personalizado</h3></div>
+<div class="card"><h3><img src="imagem/linha.png" alt=""> <br> Acabamento<br>Profissional</h3></div>
+<div class="card"><img src="imagem/hora.png" alt=""> <h3>Entrega<br>rápida</h3></div>
+<div class="card"><h3><img src="imagem/cuidado.png" alt=""> Cuidado<br>total</h3></div>
+</div>
+</div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos" class="fade-in">
+<div class="container">
+<h2>Serviços</h2>
+<div class="grid">
+<div class="card"><b>Ajustes</b></div>
+<div class="card"><b>Barras</b></div>
+<div class="card"><b>Reformas</b></div>
+<div class="card"><b>Zíper</b></div>
+</div>
+</div>
+</section>
+
+<!-- GALERIA -->
+<section class="fade-in">
+<div class="container">
+<h2> <i>Detalhes que contam histórias</i></h2>
+<div class="grid galeria">
+    <img src="imagem/costurando1.jpg" style="width: 300px; height: 400px;">
+    <img src="imagem/costurando2.jpg" style="width: 300px; height: 400px;">
+    <img src="imagem/costurando3.jpg" style="width: 300px; height: 400px ;">
+</div>
+</div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section id="avaliacoes" class="fade-in">
+<div class="container">
+<h2>Contatos</h2><br>
+<p> &#9200; Atendimento: Segunda a sexta das 10:00 ás 20:00</p>
+<p> &#128222; (11) 961166828</p>
+<p> &#128205; Diadema - SP</p>
+
+<div id="comentarios" class="grid" style="margin-top:30px;"></div>
+
+<h3 style="margin-top:40px;">Deixe sua avaliação</h3>
+
+<div class="estrelas"> 
+  <span onclick="setRating(1)">★</span>
+  <span onclick="setRating(2)">★</span>
+  <span onclick="setRating(3)">★</span>
+  <span onclick="setRating(4)">★</span>
+  <span onclick="setRating(5)">★</span>
+</div>
+
+<input type="text" id="nome" placeholder="Seu nome">
+<textarea id="mensagem" placeholder="Seu comentário"></textarea>
+
+<button onclick="adicionarComentario()" class="btn">Enviar avaliação</button>
+</div>
+</section>
+
+<a href="https://wa.me/5511961166828?text=Olá!%20Tenho%20umas%20reformas%20para%20serem%20feitas,%20como%20funciona?" class="whatsapp"><img src="imagem/whatsapp01.png" height=40 width=40></a>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+  // Substitua pelas suas chaves do Firebase
+  const firebaseConfig = {
+    apiKey: "SUA_API_KEY",
+    authDomain: "SEU_DOMINIO.firebaseapp.com",
+    databaseURL: "https://SEU_DOMINIO-default-rtdb.firebaseio.com",
+    projectId: "SEU_PROJECT_ID",
+    storageBucket: "SEU_PROJECT_ID.appspot.com",
+    messagingSenderId: "SEU_SENDER_ID",
+    appId: "SEU_APP_ID"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+</script>
+
+<script>
+function toggleMenu(){
+  document.getElementById("menu").classList.toggle("active");
+}
+
+document.querySelectorAll(".menu a").forEach(link=>{
+  link.addEventListener("click",()=>{
+    document.getElementById("menu").classList.remove("active");
+  });
+});
+
+window.addEventListener("scroll",()=>{
+  document.querySelector("header").classList.toggle("scrolled",window.scrollY>50);
+});
+
+const elements=document.querySelectorAll('.fade-in');
+window.addEventListener('scroll',()=>{
+  elements.forEach(el=>{
+    const top=el.getBoundingClientRect().top;
+    if(top<window.innerHeight-100){
+      el.classList.add('show');
+    }
+  });
+});
+
+// SISTEMA DE ESTRELAS
+let rating = 0;
+function setRating(estrelas) {
+  rating = estrelas;
+  document.querySelectorAll('.estrelas span').forEach(span => {
+    span.classList.remove('ativa');
+  });
+  for(let i = 0; i < estrelas; i++) {
+    document.querySelectorAll('.estrelas span')[i].classList.add('ativa');
+  }
+}
+
+// FUNÇÕES DE COMENTÁRIOS
+function adicionarComentario(){
+  const nome=document.getElementById("nome").value;
+  const mensagem=document.getElementById("mensagem").value;
+
+  if(nome===""||mensagem===""){
+    alert("Preencha os campos!");
+    return;
+  }
+  if(rating === 0){
+    alert("Selecione uma avaliação com as estrelas!");
+    return;
+  }
+
+  const novoComentario = {
+    nome: nome,
+    mensagem: mensagem,
+    rating: rating,
+    data: Date.now()
+  };
+
+  db.ref('comentarios').push(novoComentario, error=>{
+    if(error){
+      alert("Erro ao enviar comentário!");
+    } else {
+      carregarComentarios();
+      document.getElementById("nome").value="";
+      document.getElementById("mensagem").value="";
+      rating = 0;
+      document.querySelectorAll('.estrelas span').forEach(span=>{
+        span.classList.remove('ativa');
+      });
+    }
+  });
+}
+
+function carregarComentarios(){
+  const container = document.getElementById("comentarios");
+  container.innerHTML = '';
+
+  db.ref('comentarios').orderByChild('data').once('value', snapshot=>{
+    const comentarios = snapshot.val();
+    if(comentarios){
+      const lista = Object.values(comentarios).sort((a,b)=> b.data - a.data);
+      lista.forEach(comentario=>{
+        const div = document.createElement("div");
+        div.classList.add("card");
+
+        let estrelasHTML = '';
+        for(let i=1;i<=5;i++){
+          estrelasHTML += i <= comentario.rating ? '★' : '☆';
+        }
+
+        const dataFormatada = new Date(comentario.data).toLocaleDateString('pt-BR');
+
+        div.innerHTML = `<h4>${comentario.nome} <small style="color:#666;">(${dataFormatada})</small></h4>
+                         <div style="color:gold; font-size:20px; margin:5px 0;">${estrelasHTML}</div>
+                         <p>${comentario.mensagem}</p>`;
+
+        container.appendChild(div);
+      });
+    }
+  });
+}
+
+// CARREGA COMENTÁRIOS AO ABRIR
+carregarComentarios();
+</script>
+
+</body>
+</html>
