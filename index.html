@@ -372,6 +372,10 @@ Fazer orçamento
 };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
+
+  // TESTE
+db.ref('teste').set({msg: "ok"});
+  
 </script>
 
 <script>
@@ -451,7 +455,7 @@ function carregarComentarios(){
   const container = document.getElementById("comentarios");
   container.innerHTML = '';
 
-  db.ref('comentarios').orderByChild('data').once('value', snapshot=>{
+ db.ref('comentarios').once('value', snapshot=>{
     const comentarios = snapshot.val();
     if(comentarios){
       const lista = Object.values(comentarios).sort((a,b)=> b.data - a.data);
