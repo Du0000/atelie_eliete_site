@@ -297,7 +297,7 @@ Fazer orçamento
 <div class="card"><h3><img src="imagem/personalizado.png" ><br>Atendimento personalizado</h3></div>
 <div class="card"><h3><img src="imagem/linha.png" alt=""> <br> Acabamento<br>Profissional</h3></div>
 <div class="card"><img src="imagem/hora.png" alt=""> <h3>Entrega<br>rápida</h3></div>
-<div class="card"><h3><img src="imagem/cuidado.png" alt=""> Cuidado<br>total</h3></div>
+<div class="card"><img src="imagem/cuidado.png" alt=""><h3>Cuidado<br>total</h3></div>
 </div>
 </div>
 </section>
@@ -361,17 +361,20 @@ Fazer orçamento
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
   // Substitua pelas suas chaves do Firebase
-  const firebaseConfig = {
-    apiKey: "SUA_API_KEY",
-    authDomain: "SEU_DOMINIO.firebaseapp.com",
-    databaseURL: "https://SEU_DOMINIO-default-rtdb.firebaseio.com",
-    projectId: "SEU_PROJECT_ID",
-    storageBucket: "SEU_PROJECT_ID.appspot.com",
-    messagingSenderId: "SEU_SENDER_ID",
-    appId: "SEU_APP_ID"
-  };
+ const firebaseConfig = {
+  apiKey: "AIzaSyBjG_dM9s3nuFuegTMD2NephsvGc4eDFX4",
+  authDomain: "costura-79cd1.firebaseapp.com",
+  databaseURL: "https://costura-79cd1-default-rtdb.firebaseio.com",
+  projectId: "costura-79cd1",
+  storageBucket: "costura-79cd1.firebasestorage.app",
+  messagingSenderId: "30991009200",
+  appId: "1:30991009200:web:51158c78bd56f807f78275"
+};
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
+ 
+
+  
 </script>
 
 <script>
@@ -451,7 +454,7 @@ function carregarComentarios(){
   const container = document.getElementById("comentarios");
   container.innerHTML = '';
 
-  db.ref('comentarios').orderByChild('data').once('value', snapshot=>{
+ db.ref('comentarios').once('value', snapshot=>{
     const comentarios = snapshot.val();
     if(comentarios){
       const lista = Object.values(comentarios).sort((a,b)=> b.data - a.data);
